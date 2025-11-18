@@ -22,7 +22,7 @@
   'use strict';
   const forms = document.querySelectorAll('.needs-validation');
 
-  Array.from(forms).forEach(form => {
+  Array.from(forms).forEach((form) => {
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
         event.preventDefault();   // stop page reload
