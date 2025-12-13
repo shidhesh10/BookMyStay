@@ -5,6 +5,19 @@ const path = require("path");
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
+const session = require("express-session");
+const flash = require("connect-flash");
+
+const sessionOptions = {
+  secret: "mysupersecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 1000*60*60*24*3,
+    maxAge: 1000 * 60 * 60 * 24 * 3,
+    httpOnly: true
+  },
+};
 
 
 app.engine('ejs', ejsMate);
@@ -35,14 +48,17 @@ app.get("/", (req, res) => {
   res.send("✅ Express is working perfectly!");
 });
 
+app.use(session(sessionOptions));
+app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+})
 
 
 app.use("/listings", listings);
-
-
-//Reviews
-
 app.use("/listings/:id/reviews", reviews);
 
 app.all(/.*/,(req, res, next) => {
