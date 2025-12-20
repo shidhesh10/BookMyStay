@@ -1,4 +1,14 @@
 const Listing = require("../models/listing");
+const NodeGeocoder = require('node-geocoder');
+
+// Configure OpenStreetMap Geocoder
+const options = {
+  provider: 'openstreetmap',
+  httpAdapter: 'https',
+  formatter: null,
+  userAgent: 'BookMyStay_v1' // Needed to prevent blocking
+};
+const geocoder = NodeGeocoder(options);
 
 module.exports.index = async (req,res) => {
     const allListings = await Listing.find({});
@@ -27,16 +37,32 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-  let url = req.file.path;
-  let filename = req.file.filename;
-  
+    // 1. Get Coordinates from Address
+    let response = await geocoder.geocode(req.body.listing.location);
+    
+    // 2. Handle Image info
+    let url = req.file.path;
+    let filename = req.file.filename;
+    
+    // 3. Create Listing Instance
     const newListing = new Listing(req.body.listing);
+    
+    // 4. Assign Owner & Image
     newListing.owner = req.user._id;
-    newListing.image = {url, filename};
-    await newListing.save();
+    newListing.image = { url, filename };
+
+    // OpenStreetMap returns an array, we take the first result [0]
+    newListing.geometry = {
+        type: 'Point', 
+        coordinates: [response[0].longitude, response[0].latitude]
+    };
+
+    // 5. Save & Redirect
+    let savedListing = await newListing.save();
+    console.log(savedListing); // Check your terminal to see the coordinates!
+    
     req.flash("success", "New Listing Created");
     res.redirect("/listings");
-  
 };
 
 module.exports.renderEditForm = async (req, res) => {
