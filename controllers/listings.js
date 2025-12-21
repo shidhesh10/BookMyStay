@@ -10,9 +10,19 @@ const options = {
 };
 const geocoder = NodeGeocoder(options);
 
-module.exports.index = async (req,res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", {allListings})
+module.exports.index = async (req, res) => {
+    const { category } = req.query;
+    let allListings;
+
+    if (category) {
+        // If user clicked a category icon, find listings matching that category
+        allListings = await Listing.find({ category: category });
+    } else {
+        // If no category selected, show ALL listings (Default behavior)
+        allListings = await Listing.find({});
+    }
+
+    res.render("listings/index.ejs", { allListings });
 };
 
 module.exports.renderNewForm = (req, res) => {
@@ -102,3 +112,23 @@ module.exports.destroyListing = async (req, res) => {
   res.redirect("/listings");
   
 };
+
+module.exports.search = async(req, res) => {
+  console.log(req.query.q);
+  let {q} = req.query;
+
+  if(!q) {
+    return redirect("/listings");
+  }
+
+  const sanitizedQuery = q.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const listings = await Listing.find({
+    $or: [
+      {location: {$regex: sanitizedQuery, $options: "i"}},
+      {country: {$regex: sanitizedQuery, $options: "i"}}
+    ]
+  });
+
+  res.render("listings/index.ejs", { allListings: listings });
+}

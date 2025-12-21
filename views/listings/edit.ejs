@@ -39,6 +39,23 @@
                     <label for="image" class="form-label">Upload New Image:</label>
                     <input type="file" name="listing[image]" class="form-control">
                 </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="listing[category]" class="form-select">
+                        <% 
+                        const categories = ["Trending", "Rooms", "Iconic Cities", "Mountains", "Castles", "Amazing Pools", "Camping", "Farms", "Arctic", "Doms", "House Boat"]; 
+                        %>
+                        
+                        <option value="" <%= !listing.category ? 'selected' : '' %> disabled>Select a category</option>
+
+                        <% for(let cat of categories) { %>
+                            <option value="<%= cat %>" <%= listing.category === cat ? 'selected' : '' %> >
+                                <%= cat %>
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
                 
                 <div class="row">
                     <div class="mb-3 col-md-4">
