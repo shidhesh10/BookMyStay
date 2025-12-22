@@ -1,65 +1,353 @@
+/* =========================================
+   1. GLOBAL & TYPOGRAPHY
+   ========================================= */
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
 }
 
 .container {
     flex: 1;
 }
 
-.navbar {
-    height: 5rem;
-    background-color: white;
+a {
+    text-decoration: none !important;
+    color: inherit;
 }
 
-.fa-compass {
-    color: #fe424d;
-    font-size: 2rem;   
+/* =========================================
+   2. NAVBAR LAYOUT & ANIMATION
+   ========================================= */
+#main-navbar {
+    height: auto !important;
+    min-height: 140px;
+    background-color: white !important;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    z-index: 1050;
+    border-bottom: 1px solid #eaeaea;
 }
 
-.nav-link {
-    color: #222222 !important;
-}
-
-/* Footer */
-
-.f-info-links a {
-    text-decoration: none;
-    color: #222222;
-
-}
-
-.f-info-links a:hover {
-    text-decoration: underline;
-}
-
-.f-info-links, .f-info-socials, .f-info-brand {
+.navbar-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    padding: 0 1rem;
+}
+
+/* Row 1: Logo, Search, Profile */
+.navbar-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    padding-top: 10px;
+}
+
+/* Row 2: Categories (Animated) */
+.navbar-bottom-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 10px 0 !important;
+    
+    /* Animation Properties */
+    transition: all 0.3s ease-in-out;
+    height: 48px;
+    opacity: 1;
+    overflow: hidden;
+    transform-origin: top;
+}
+
+/* Scrolled State: Hides Row 2 */
+.is-scrolled .navbar-bottom-row {
+    height: 0 !important;
+    opacity: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
+/* =========================================
+   3. SEARCH BAR COMPONENT
+   ========================================= */
+.navbar-search-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 100%;
+    height: 48px;
+    max-width: 700px;
+    transition: all 0.3s ease;
+}
+
+.search-bar-container:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.search-input {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 1rem;
+    color: #222;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+/* Red Search Button (Pill Shape with Text) */
+.search-btn {
+    background-color: #fe424d !important;
+    color: white !important;
+    height: 40px; 
+    border-radius: 50px !important; 
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px !important; 
+    gap: 8px;
+    width: auto;
+    border: none;
+}
+
+.search-btn:hover {
+    background-color: #d93b43 !important;
+}
+
+.search-btn-text {
+    display: inline-block;
+    font-weight: 600;
+}
+
+.search-icon-left {
+    color: #717171;
+    margin-right: 10px;
+}
+
+/* Search Suggestions */
+.suggestions-box {
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 700px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 1000;
+    padding: 10px 0;
+    border: 1px solid #eee;
+}
+
+.suggestions-box.scroll-active {
+    max-height: 450px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.95rem;
+    color: #222;
+    transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+    background-color: #f7f7f7;
+}
+
+.suggestion-icon {
+    background-color: #f1f1f1;
+    color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.show-more-btn {
+    color: #fe424d;
+    font-weight: 600;
+    justify-content: center;
+    border-top: 1px solid #eee;
+}
+
+.show-more-btn:hover {
+    background-color: #fff0f1;
+}
+
+/* =========================================
+   4. CATEGORIES & FILTERS
+   ========================================= */
+.filters-scroll {
+    display: flex !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    overflow-x: auto !important;
+    flex-grow: 0 !important;
+    width: fit-content !important; 
+    max-width: 80% !important;
+    margin-right: 20px !important; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.filters-scroll::-webkit-scrollbar { display: none; }
+
+.filter {
+    color: rgb(35, 33, 33);
+    text-decoration: none;
+    text-align: center;
+    opacity: 0.7;
+    flex-shrink: 0;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.filter:hover {
+    opacity: 1;
+    border-bottom: 2px solid #ccc;
+}
+
+.active-filter {
+    opacity: 1 !important;
+    border-bottom: 3px solid black !important;
+    font-weight: 800;
+}
+
+.filter-icon {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.filter-text {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.tax-toggle-box {
+    flex-shrink: 0;
+    width: auto !important;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    height: 48px; 
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 600;
+    background: white;
+    cursor: pointer;
+}
+
+.tax-toggle-box:hover {
+    border-color: #000;
+    background-color: #f7f7f7;
+}
+
+.tax-info { display: none; }
+
+/* =========================================
+   5. PROFILE & BRANDING
+   ========================================= */
+.navbar-brand .fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.navbar-profile-zone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.host-btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222 !important;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    transition: 0.2s;
+}
+.host-btn:hover { background-color: #f7f7f7; }
+
+/* Profile Button */
+.profile-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 45px !important; /* Circle shape override */
+    height: 45px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    margin-left: 1rem;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.profile-btn:hover {
+    box-shadow: 0 5px 5px rgba(0,0,0,0.18);
+}
+
+.user-icon-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #717171;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    font-size: 1.1rem;
 }
 
-.f-info-socials i {
-    margin-right: 1rem;
-    font-size: 1.2rem;
-}
 
-.f-info {
-    text-align: center;
-    display: flex;
-    height: 8rem;
-    background-color: #ebebeb;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
-}
+.no-arrow::after { display: none !important; }
 
-/* Cards */
-
+/* =========================================
+   6. CARDS & LISTINGS
+   ========================================= */
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
@@ -79,12 +367,6 @@ body {
     font-weight: 400 !important;
 }
 
-.listing-link {
-    text-decoration: none;
-}
-
-/* Card Effect */
-
 .card-img-overlay {
     opacity: 0;
 }
@@ -94,27 +376,15 @@ body {
     background-color: white;
 }
 
-/* New Page */
-
-.add-btn {
-    background-color: #fe424d !important;
-    border: none !important;
-}
-
-/* Edit Page */
-
-.edit-btn {
-    background-color: #fe424d !important;
-    border: none !important;
-}
-
-/* Show Page */
-.show-img{
+.show-img {
     height: 30vh;
+    width: 100%;
+    object-fit: cover;
 }
 
 .btns {
-    display: flex;   
+    display: flex;
+    gap: 1rem; /* Added gap for spacing between buttons */
 }
 
 .show-card {
@@ -122,245 +392,54 @@ body {
     padding-right: 0;
 }
 
-/* Index.ejs */
-
-#filters {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 90px;
-    background-color: white;
+.nav-link {
+    color: #222222 !important;
 }
 
-.filters-main {
-    display: flex;
-    overflow-x: auto;
-    flex-grow: 1;
-    align-items: center;
-    padding-right: 2rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.filters-main::-webkit-scrollbar {
-    display: none;
-}
-
-.filter {
-    margin-top: 1rem;
-    margin-right: 2rem;
-    text-align: center;
-    opacity: 0.7;
-    transition: all 0.3s ease;
+.listing-link {
     text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    flex-shrink: 0;
 }
-
-.filter:hover {
-    opacity: 1;
-    border-bottom: 2px solid #ccc;
-}
-
-.active-filter {
-    opacity: 1 !important;
-    border-bottom: 3px solid black !important;
-    font-weight: 800;
-}
-
-.filter p {
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
-}
-
-.tax-info {
-    display: none;
-}
-
-.tax-toggle {
-    border: 1px solid #ddd;
-    border-radius: 1rem;
-    height: 3.2rem;
-    padding: 1rem;
+/* =========================================
+   7. FOOTER
+   ========================================= */
+.f-info {
+    text-align: center;
     display: flex;
-    align-items: center;
-    margin-left: auto;
-    flex-shrink: 0; 
-}
-
-/* Navbar.ejs */
-
-.search-btn {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
-
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
-  }
-
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
-
-  .search-input {
-    border-radius: 25px;
-    padding: 0.5 3rem 0.5 3rem;
-    font-size: 1rem;
-  }
-
-  /* --- SMART SEARCH CAPSULE STYLING --- */
-.search-bar-container {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 50px; 
-    padding: 5px 5px 5px 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    min-width: 350px; 
-    width: 100%;       
-    max-width: 700px;
-}
-
-/* Hover Effect: Lifts up slightly */
-.search-bar-container:hover {
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    transform: translateY(-1px);
-}
-
-.search-input-wrapper {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    width: 100%;
-}
-
-/* The little location icon inside the input */
-.search-icon-left {
-    color: #717171;
-    margin-right: 10px;
-}
-
-/* Removing default Bootstrap input borders */
-.search-input {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    padding: 0 10;
-    font-size: 0.95rem;
-    color: #222;
-    background: transparent;
-    width: 100%;
-}
-
-/* The Search Button (Red Circle) */
-.search-btn {
-    background-color: #fe424d; /* Airbnb Red */
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 10px 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Space between icon and text */
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.search-btn:hover {
-    background-color: #d93b43; /* Darker red on hover */
-}
-
-.suggestions-box {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    width: 100%;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 1000;
-    padding: 10px 0;
-    border: 1px solid #eee;
-    scrollbar-width: thin;
-}
-
-.suggestions-box.scroll-active {
-    max-height: 450px; /* Now we limit the height */
-    overflow-y: auto;  /* And show the scrollbar */
-    scrollbar-width: thin;
-}
-
-.suggestions-box::-webkit-scrollbar { width: 8px; }
-.suggestions-box::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
-
-.suggestion-item {
-    padding: 12px 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 0.95rem;
-    color: #222;
-    transition: background 0.2s;
-}
-
-/* Icon inside the suggestion */
-.suggestion-icon {
-    background-color: #f1f1f1;
-    color: #555;
-    
-    display: flex;
+    height: 8rem;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
-    width: 35px !important;
-    height: 35px !important;
-    border-radius: 50%;
-    
-    font-size: 1rem;
-    margin-right: 15px;
-    flex-shrink: 0;
 }
 
-.suggestion-item:hover {
-    background-color: #f7f7f7; /* Light grey hover effect */
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Helper to hide it */
-.d-none {
-    display: none !important;
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
 }
 
-.show-more-btn {
-    color: #fe424d; /* Airbnb Red */
-    font-weight: 600;
-    justify-content: center; /* Center it */
-    border-top: 1px solid #eee; /* Divider line above it */
+.f-info-links a:hover {
+    text-decoration: underline;
 }
 
-.show-more-btn:hover {
-    background-color: #fff0f1; /* Light red hover tint */
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
 }
 
-.show-more-btn .suggestion-icon {
-    width: auto !important; /* Let the arrow fit naturally */
-    background: transparent !important;
-    color: #fe424d;
-    margin-right: 10px;
+/* =========================================
+   8. UTILITIES & BUTTONS
+   ========================================= */
+.add-btn, .edit-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+    color: white;
 }
 
-.filter {
-    /* ... your existing styles ... */
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Keeps your black/grey text color */
-}
+.d-none { display: none !important; }

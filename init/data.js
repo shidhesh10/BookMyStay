@@ -42,7 +42,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: Authentic Boston Beacon Hill street
-      url: "https://images.unsplash.com/photo-1505884065216-066eb68d968c?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1740151369510-9a7a72bf4091?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 2200,
     location: "Boston",
@@ -56,7 +56,7 @@ const sampleListings = [
     description: "Stay in the heart of the city in this stylish loft apartment. Perfect for urban explorers!",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1741951677479-01551f0151af?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 1200,
     location: "New York City",
@@ -81,7 +81,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: High-end city apartment interior with view
-      url: "https://images.unsplash.com/photo-1512918760513-95f1929c3d47?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1706578314787-be50d411a46b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 3500,
     location: "Los Angeles",
@@ -134,7 +134,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: Dunnottar Castle (Iconic Scottish look)
-      url: "https://images.unsplash.com/photo-1506377872008-6645d9d29137?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1578240748485-ad93c9c30aea?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 4000,
     location: "Scottish Highlands",
@@ -199,7 +199,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: Luxury Safari Tent interior/exterior
-      url: "https://images.unsplash.com/photo-1617514930372-2336829759d5?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1723643750330-c868b56af36f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 4000,
     location: "Serengeti National Park",
@@ -225,7 +225,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: Authentic wooden treehouse structure
-      url: "https://images.unsplash.com/photo-1449156493391-d2cfa28e468b?w=800&auto=format&fit=crop&q=60",
+      url: "https://plus.unsplash.com/premium_photo-1685305380695-90e58a33d4e9?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 750,
     location: "Costa Rica",
@@ -277,7 +277,7 @@ const sampleListings = [
     description: "Watch the Northern Lights from the comfort of your warm glass igloo in the snowy wilderness.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1764942394410-5b3f027b459b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 1800,
     location: "Rovaniemi",
@@ -305,7 +305,7 @@ const sampleListings = [
     image: {
       filename: "listingimage",
       // FIXED: EcoCamp Patagonia Domes
-      url: "https://images.unsplash.com/photo-1526491109672-74740652028d?w=800&auto=format&fit=crop&q=60",
+      url: "https://images.unsplash.com/photo-1743019486333-e9f7032b912e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 1600,
     location: "Torres del Paine",

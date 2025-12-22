@@ -1,41 +1,5 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div id="filters">
-    <div class="filters-main">
-        <% 
-        let filters = [
-            { name: "Trending", icon: "fa-fire" },
-            { name: "Rooms", icon: "fa-bed" },
-            { name: "Iconic Cities", icon: "fa-mountain-city" },
-            { name: "Mountains", icon: "fa-mountain" },
-            { name: "Castles", icon: "fa-fort-awesome" },
-            { name: "Amazing Pools", icon: "fa-person-swimming" },
-            { name: "Camping", icon: "fa-campground" },
-            { name: "Farms", icon: "fa-cow" },
-            { name: "Arctic", icon: "fa-snowflake" },
-            { name: "Doms", icon: "fa-igloo" },
-            { name: "House Boat", icon: "fa-ship" },
-            { name: "Deserts", icon: "fa-umbrella-beach" }
-        ];
-        %>
-
-        <% for(let filter of filters) { %>
-            <a href="/listings?category=<%= filter.name %>" 
-               class="filter <%= (typeof category !== 'undefined' && category === filter.name) ? 'active-filter' : '' %>">
-                <div><i class="fa-solid <%= filter.icon %>"></i></div>
-                <p><%= filter.name %></p>
-            </a>
-        <% } %>
-    </div>
-
-    <div class="tax-toggle">
-        <div class="form-check-reverse form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
-        </div>
-    </div>
-</div>
-
     <div class="container mt-3">
 
   <% if(allListings.length === 0) { %>
@@ -60,7 +24,7 @@
                     <div class="card-body">
                         <p class="card-text">
                             <b><%= listing.title %></b> <br>
-                            &#8377; <%= listing.price.toLocaleString("en-IN") %>/ Night
+                            &#8377; <%= listing.price.toLocaleString("en-IN") %> / Night
                             <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
                         </p>
                     </div>
@@ -73,14 +37,30 @@
     
 <script>
     let taxSwitch = document.getElementById("switchCheckDefault");
-    taxSwitch.addEventListener("click", () => {
-        let taxInfo = document.getElementsByClassName("tax-info");
-        for(info of taxInfo) {
-            if(info.style.display != "inline") {
-                info.style.display = "inline"
-            } else {
-                info.style.display = "none"
+
+    if(taxSwitch) {
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for (let info of taxInfo) {
+                if (info.style.display != "inline") {
+                    info.style.display = "inline";
+                } else {
+                    info.style.display = "none";
+                }
             }
+        });
+    }
+
+    let navbar = document.getElementById("main-navbar");
+
+    window.addEventListener("scroll", () => {
+        // If user scrolls down more than 100px
+        if (window.scrollY > 100) {
+            navbar.classList.add("is-scrolled");
+        } else {
+            navbar.classList.remove("is-scrolled");
         }
-    })
+    });
+
+
 </script>
