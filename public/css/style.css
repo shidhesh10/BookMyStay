@@ -126,24 +126,53 @@ body {
 
 #filters {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
+    width: 100%;
+    height: 90px;
+    background-color: white;
+}
+
+.filters-main {
+    display: flex;
+    overflow-x: auto;
+    flex-grow: 1;
+    align-items: center;
+    padding-right: 2rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.filters-main::-webkit-scrollbar {
+    display: none;
 }
 
 .filter {
-    text-align: center;
+    margin-top: 1rem;
     margin-right: 2rem;
-    margin-top: 2rem;
+    text-align: center;
     opacity: 0.7;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    flex-shrink: 0;
 }
 
 .filter:hover {
     opacity: 1;
-    cursor: pointer;
+    border-bottom: 2px solid #ccc;
+}
+
+.active-filter {
+    opacity: 1 !important;
+    border-bottom: 3px solid black !important;
+    font-weight: 800;
 }
 
 .filter p {
     font-size: 0.8rem;
+    margin-top: 0.2rem;
 }
 
 .tax-info {
@@ -151,13 +180,14 @@ body {
 }
 
 .tax-toggle {
-    border: 1px solid black;
+    border: 1px solid #ddd;
     border-radius: 1rem;
-    height: 3rem;
+    height: 3.2rem;
     padding: 1rem;
-    margin-left: 2rem;
     display: flex;
     align-items: center;
+    margin-left: auto;
+    flex-shrink: 0; 
 }
 
 /* Navbar.ejs */

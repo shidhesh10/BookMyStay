@@ -22,7 +22,7 @@ module.exports.index = async (req, res) => {
         allListings = await Listing.find({});
     }
 
-    res.render("listings/index.ejs", { allListings });
+    res.render("listings/index.ejs", { allListings, category });
 };
 
 module.exports.renderNewForm = (req, res) => {

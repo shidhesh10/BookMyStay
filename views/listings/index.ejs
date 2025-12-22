@@ -1,68 +1,40 @@
 <% layout("/layouts/boilerplate") %>
 
     <div id="filters">
-        <a href="/listings?category=Trending" class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </a>
+    <div class="filters-main">
+        <% 
+        let filters = [
+            { name: "Trending", icon: "fa-fire" },
+            { name: "Rooms", icon: "fa-bed" },
+            { name: "Iconic Cities", icon: "fa-mountain-city" },
+            { name: "Mountains", icon: "fa-mountain" },
+            { name: "Castles", icon: "fa-fort-awesome" },
+            { name: "Amazing Pools", icon: "fa-person-swimming" },
+            { name: "Camping", icon: "fa-campground" },
+            { name: "Farms", icon: "fa-cow" },
+            { name: "Arctic", icon: "fa-snowflake" },
+            { name: "Doms", icon: "fa-igloo" },
+            { name: "House Boat", icon: "fa-ship" },
+            { name: "Deserts", icon: "fa-umbrella-beach" }
+        ];
+        %>
 
-        <a href="/listings?category=Rooms" class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </a>
+        <% for(let filter of filters) { %>
+            <a href="/listings?category=<%= filter.name %>" 
+               class="filter <%= (typeof category !== 'undefined' && category === filter.name) ? 'active-filter' : '' %>">
+                <div><i class="fa-solid <%= filter.icon %>"></i></div>
+                <p><%= filter.name %></p>
+            </a>
+        <% } %>
+    </div>
 
-        <a href="/listings?category=Iconic Cities" class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </a>
-
-        <a href="/listings?category=Mountains" class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </a>
-
-        <a href="/listings?category=Castles" class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </a>
-
-        <a href="/listings?category=Amazing Pools" class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </a>
-
-        <a href="/listings?category=Camping" class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </a>
-
-        <a href="/listings?category=Farms" class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </a>
-
-        <a href="/listings?category=Arctic" class="filter">
-            <div><i class="fa-solid fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </a>
-
-        <a href="/listings?category=Doms" class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Doms</p>
-        </a>
-
-        <a href="/listings?category=House Boat" class="filter">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>House Boat</p>
-        </a>
-
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
-            </div>
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
         </div>
     </div>
+</div>
 
     <div class="container mt-3">
 
