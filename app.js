@@ -14,6 +14,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const Listing = require("./models/listing");
+
 
 const sessionOptions = {
   secret: "mysupersecretcode",
@@ -52,10 +54,6 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
-// app.get("/", (req, res) => {
-//   res.send("✅ Express is working perfectly!");
-// });
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -73,16 +71,42 @@ app.use((req, res, next) => {
   next();
 })
 
+// SEARCH SUGGESTIONS API (PRIORITY: Title > City > Country)
+app.get("/api/listings/search", async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q || q.trim().length === 0) {
+      return res.json([]);
+    }
 
-// app.get("/demouser", async (req, res) => {
-//   let fakeUser = new User({
-//     email: "student@gmail.com",
-//     username: "delta-student"
-//   });
+    const regex = new RegExp(`^${q}`, "i"); // starts with, case-insensitive
 
-//   const registeredUser = await User.register(fakeUser, "helloworld");
-//   res.send(registeredUser);
-// })
+    // Fetch matching listings
+    const listings = await Listing.find({
+      $or: [
+        { title: regex },
+        { location: regex },
+        { country: regex }
+      ]
+    });
+
+    // PRIORITY SORTING
+    const sorted = listings.sort((a, b) => {
+      const score = (listing) => {
+        if (listing.title.match(regex)) return 1;
+        if (listing.location.match(regex)) return 2;
+        if (listing.country.match(regex)) return 3;
+        return 4;
+      };
+      return score(a) - score(b);
+    });
+
+    res.json(sorted);
+  } catch (err) {
+    console.error("Search API Error:", err);
+    res.status(500).json([]);
+  }
+});
 
 
 app.use("/listings", listingRouter);

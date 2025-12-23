@@ -64,6 +64,20 @@ a {
     transform-origin: top;
 }
 
+/* Logo Image Styling */
+.logo-img {
+    width: 9rem; /* Adjust this to match your navbar height */
+    object-fit: contain;
+    display: block; /* Removes extra space below inline images */
+}
+
+/* Update navbar-brand to remove font-size (since we aren't using an icon anymore) */
+.navbar-brand {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
 /* Scrolled State: Hides Row 2 */
 .is-scrolled .navbar-bottom-row {
     height: 0 !important;
@@ -95,6 +109,9 @@ a {
     height: 48px;
     max-width: 700px;
     transition: all 0.3s ease;
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 1000;
 }
 
 .search-bar-container:hover {
@@ -103,10 +120,12 @@ a {
 }
 
 .search-input-wrapper {
+    font-size: 14px;
     display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
+    line-height: 1.4;
 }
 
 .search-input {
@@ -152,66 +171,95 @@ a {
 }
 
 /* Search Suggestions */
+/* 1. Parent Container (CRITICAL) */
+/* This ensures the box aligns with the search bar, not the whole page */
+.search-bar-container {
+    position: relative !important;
+    overflow: visible !important; /* Lets the box hang out */
+    z-index: 1000;
+}
+
+/* 2. The Suggestions Box */
 .suggestions-box {
     position: absolute;
-    top: 105%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 700px;
-    background: white;
+    top: 100%; /* Pushes it exactly below the input */
+    left: 0;
+    right: 0;  /* Stretches to full width */
+    background-color: white !important;
+    z-index: 99999 !important; /* Forces it on top of Map/Navbar */
+    
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    border: 1px solid #ddd;
+    border-top: none;
+    margin: 5px;
     padding: 10px 0;
-    border: 1px solid #eee;
+    
+    
+    display: block;
 }
 
-.suggestions-box.scroll-active {
-    max-height: 450px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
+/* 3. The Individual Items */
 .suggestion-item {
-    padding: 12px 20px;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 30px;
     cursor: pointer;
-    display: flex;
+    background: white;
+    
+    display: flex;       /* Aligns icon and text */
     align-items: center;
     gap: 15px;
-    font-size: 0.95rem;
-    color: #222;
-    transition: background 0.2s;
+    
+    color: #333; /* Ensures text is visible (not white-on-white) */
+    transition: background 0.2s ease;
 }
 
 .suggestion-item:hover {
     background-color: #f7f7f7;
 }
 
-.suggestion-icon {
-    background-color: #f1f1f1;
-    color: #555;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    font-size: 1rem;
-    flex-shrink: 0;
+/* Styling for the expanded state */
+.suggestions-box.scroll-active {
+    max-height: 300px;
+    overflow-y: auto; 
 }
 
+/* Styling for the Show More/Less buttons */
 .show-more-btn {
-    color: #fe424d;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    font-weight: 600;
+    color: #fe424d;
+    cursor: pointer;
+    background: white;
     border-top: 1px solid #eee;
+    
 }
 
 .show-more-btn:hover {
     background-color: #fff0f1;
 }
 
+/* 4. The Icon Circle */
+.suggestion-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    flex-shrink: 0;
+}
+
+/* 5. Utility to Hide (Bootstrap Standard) */
+.d-none {
+    display: none;
+}
 /* =========================================
    4. CATEGORIES & FILTERS
    ========================================= */
@@ -431,6 +479,23 @@ a {
 .f-info-socials i {
     margin-right: 1rem;
     font-size: 1.2rem;
+}
+
+.f-info-credit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #717171;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    gap: 5px;
+}
+
+.f-info-credit b {
+    color: #222; /* Makes your name slightly darker */
+    margin-left: 4px;
 }
 
 /* =========================================

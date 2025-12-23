@@ -24,8 +24,13 @@
                     <div class="card-body">
                         <p class="card-text">
                             <b><%= listing.title %></b> <br>
-                            &#8377; <%= listing.price.toLocaleString("en-IN") %> / Night
-                            <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+                            <b>&#8377; 
+                                <span class="listing-price" data-base-price="<%= listing.price %>">
+                                <%= listing.price.toLocaleString("en-IN") %>
+                                </span>
+                            </b> / Night
+
+                            <i class="tax-info"> &nbsp; (includes 18% GST)</i>
                         </p>
                     </div>
         </div>
@@ -48,19 +53,24 @@
                     info.style.display = "none";
                 }
             }
+
+            let prices = document.getElementsByClassName("listing-price");
+            for (let price of prices) {
+                // Get the original price stored in the data attribute
+                let basePrice = parseFloat(price.dataset.basePrice);
+            
+                if (taxSwitch.checked) {
+                    // Calculate 18% tax
+                    let taxValue = basePrice * 0.18;
+                    let totalPrice = basePrice + taxValue;
+                    
+                    // Update the text with the new total (formatted with commas)
+                    price.innerText = totalPrice.toLocaleString("en-IN");
+                } else {
+                    // Revert back to the base price
+                    price.innerText = basePrice.toLocaleString("en-IN");
+                }
+            }
         });
     }
-
-    let navbar = document.getElementById("main-navbar");
-
-    window.addEventListener("scroll", () => {
-        // If user scrolls down more than 100px
-        if (window.scrollY > 100) {
-            navbar.classList.add("is-scrolled");
-        } else {
-            navbar.classList.remove("is-scrolled");
-        }
-    });
-
-
 </script>
