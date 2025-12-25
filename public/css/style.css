@@ -137,7 +137,8 @@ a {
     background: transparent;
     width: 100%;
     height: 100%;
-    padding-left: 20px;
+    padding-right: 35px !important; 
+    padding-left: 15px !important;
 }
 
 /* Red Search Button (Pill Shape with Text) */
@@ -249,7 +250,7 @@ a {
     background-color: #f1f1f1;
     border-radius: 50%;
     
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     color: #666;
@@ -508,3 +509,216 @@ a {
 }
 
 .d-none { display: none !important; }
+
+
+
+/* ==================================================
+   MOBILE RESPONSIVENESS (Max-Width: 768px ONLY)
+   This section handles Phones & Tablets.
+   ================================================== */
+
+@media (max-width: 768px) {
+
+    /* --- 1. GLOBAL MOBILE RESET --- */
+    body, html {
+        overflow-x: hidden; /* Stops side-scrolling bugs */
+        width: 100%;
+    }
+    .container, .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        max-width: 100%;
+    }
+
+    /* --- 2. LINE 1: STICKY HEADER (Logo + Search + User) --- */
+    /* Forces the top row to stay stuck to the top of the phone screen */
+    .navbar-top-row {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px; /* Fixed height for header */
+        z-index: 1050;
+        background-color: white;
+        border-bottom: 1px solid #f2f2f2;
+        
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 15px !important;
+    }
+
+    /* Resize Logo for Mobile */
+    .logo-img { 
+        width: 70px !important;
+    }
+
+    /* --- 3. LINE 2 & 3: CONTENT SPACER --- */
+    /* Pushes content down so it doesn't hide behind the sticky header */
+    .navbar-bottom-row {
+        margin-top: 70px !important; 
+        display: flex !important;
+        flex-direction: column !important; /* Forces vertical stacking */
+        height: auto !important;
+        padding-bottom: 10px !important;
+        background-color: white;
+        opacity: 1 !important; /* Ensure it stays visible */
+        pointer-events: auto !important;
+    }
+
+    /* LINE 2: Categories (Horizontal Scroll) */
+    .filters-scroll {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        gap: 20px !important;
+        overflow-x: auto !important;
+        padding: 10px 5px;
+        border-bottom: 1px solid #f8f8f8;
+        margin-right: 0 !important;
+    }
+    .filters-scroll::-webkit-scrollbar { display: none; }
+
+    /* LINE 3: Tax Toggle (Stacked Below) */
+    .tax-toggle-box {
+        width: 100% !important;
+        padding: 10px 15px;
+        display: block !important;
+        margin-top: 5px;
+        border: none !important;
+    }
+
+    /* Inner Toggle Styling */
+    .tax-toggle-box .form-check-reverse {
+        width: 100%;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        border-radius: 12px;
+        background-color: white;
+        margin: 0;
+    }
+    
+    /* Fix text alignment inside toggle */
+    .form-check-label {
+        order: 1 !important;        /* Visual position: 1st */
+        margin-right: auto !important; /* Push everything else to the right */
+        margin-bottom: 0 !important;
+        flex-grow: 1 !important;    /* Take up available space */
+        text-align: left !important;
+    }
+    .form-switch { padding-left: 0 !important; margin-bottom: 0 !important; }
+    .form-check-input {
+        order: 2 !important;        /* Visual position: 2nd */
+        margin-left: 10px !important; 
+        margin-top: 0 !important;
+        transform: scale(1.2);      /* Optional: Make switch slightly bigger for thumb */
+    }
+
+    /* --- 4. COMPACT SEARCH BAR --- */
+    /* Squeezes search bar to fit next to user icon */
+    .navbar-search-wrapper {
+        flex-grow: 1;
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; /* Align right */
+    }
+
+    .search-bar-container {
+        width: 100% !important;
+        background-color: white !important;
+        border: 1px solid #ddd !important;
+        border-radius: 30px !important;
+        height: 40px !important;
+        padding: 0 5px !important;
+        display: flex !important;
+        align-items: center !important;
+        position: relative !important;
+    }
+
+    /* Hide the long input field on mobile (User clicks icon to search) */
+    /* OR: If you want it visible, change width to 100px */
+    .search-btn {
+        /* Force perfect square dimensions */
+        width: 35px !important;
+        height: 35px !important;
+        min-width: 35px !important; /* Prevents squeezing */
+        min-height: 35px !important;
+        
+        /* Make it round */
+        border-radius: 50% !important;
+        padding: 0 !important; /* Critical: remove padding to keep it round */
+        
+        /* Positioning */
+        position: absolute !important;
+        right: 5px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 10; /* Ensure it sits on top */
+        
+        /* Center the icon */
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        background-color: #fe424d !important;
+        color: white;
+    }
+
+    /* Make the button a standalone Circle Icon */
+    .search-btn {
+        width: 35px !important;
+        height: 35px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        background-color: #fe424d !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .search-btn span { display: none !important; } /* Hide text "Search" */
+
+    /* --- 5. COMPACT "LIST PROPERTY" BUTTON --- */
+    .host-btn {
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+        max-width: 55px !important;
+        white-space: normal !important; /* Force 2 lines */
+        padding: 0 !important;
+        margin-right: 5px !important;
+        text-align: center;
+        background: transparent !important;
+    }
+    
+    .navbar-profile-zone {
+        margin-left: 5px !important;
+        gap: 5px !important;
+    }
+    
+    .profile-btn {
+        width: 35px !important;
+        height: 35px !important;
+        margin-left: 0 !important;
+    }
+
+    /* --- 6. GRID FIX (1 Column Listings) --- */
+    .row-cols-md-2 > *, .row-cols-lg-3 > * {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+    
+    /* Image Height Fix */
+    .card-img-top { height: 250px !important; }
+    
+    /* Listing Details Page Full Width */
+    .col-8.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 0 15px !important;
+    }
+    
+    /* Reduce side margins on buttons */
+    .edit-btn { margin-left: 10px !important; }
+}
