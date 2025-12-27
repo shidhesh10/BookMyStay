@@ -103,6 +103,10 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 // Search API
 app.get("/api/listings/search", async (req, res) => {
   try {
