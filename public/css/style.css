@@ -506,6 +506,7 @@ a {
     background-color: #fe424d !important;
     border: none !important;
     color: white;
+    width: 70px !important;
 }
 
 .d-none { display: none !important; }
@@ -720,5 +721,8 @@ a {
     }
     
     /* Reduce side margins on buttons */
-    .edit-btn { margin-left: 10px !important; }
+    .edit-btn { 
+        margin-left: 10px !important;
+        width: 70px !important;
+    }
 }
