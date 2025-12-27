@@ -25,7 +25,7 @@ const userRouter = require("./routes/user.js");
 
 // ================= CONFIG =================
 const dbUrl = process.env.ATLASDB_URL;
-const secret = process.env.SECRET || "thisshouldbeabettersecret!";
+const secret = process.env.SECRET;
 const PORT = 8080;
 
 app.engine("ejs", ejsMate);
