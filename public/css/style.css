@@ -610,7 +610,7 @@ a {
         flex-grow: 1 !important;    /* Take up available space */
         text-align: left !important;
     }
-    .form-switch { padding-left: 0 !important; margin-bottom: 0 !important; }
+    .form-switch { padding-left: 0.8rem !important; padding-right: 3.5rem !important; margin-bottom: 0 !important; }
     .form-check-input {
         order: 2 !important;        /* Visual position: 2nd */
         margin-left: 10px !important; 
@@ -642,6 +642,9 @@ a {
 
     /* Hide the long input field on mobile (User clicks icon to search) */
     /* OR: If you want it visible, change width to 100px */
+    .search-input {
+        border-radius: 30px !important;
+    }
     .search-btn {
         /* Force perfect square dimensions */
         width: 35px !important;
