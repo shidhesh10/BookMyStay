@@ -6,7 +6,7 @@ const options = {
   provider: 'openstreetmap',
   httpAdapter: 'https',
   formatter: null,
-  userAgent: 'BookMyStay_v1' // Needed to prevent blocking
+  userAgent: 'BookMyStay_Project/1.0 (shidheshbhatiya1004@gmail.com)',
 };
 const geocoder = NodeGeocoder(options);
 
@@ -47,9 +47,13 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-    // 1. Get Coordinates from Address
-    let response = await geocoder.geocode(req.body.listing.location);
-    
+    let response = [];
+    try {
+        response = await geocoder.geocode(req.body.listing.location);
+    } catch (err) {
+        console.log("Geocoding failed, using default location:", err.message);
+    }
+
     // 2. Handle Image info
     let url = req.file.path;
     let filename = req.file.filename;
@@ -62,9 +66,11 @@ module.exports.createListing = async (req, res, next) => {
     newListing.image = { url, filename };
 
     // OpenStreetMap returns an array, we take the first result [0]
-    newListing.geometry = {
+    newListing.geometry = { 
         type: 'Point', 
-        coordinates: [response[0].longitude, response[0].latitude]
+        coordinates: response.length > 0 
+            ? [response[0].longitude, response[0].latitude] 
+            : [77.2090, 28.6139] // Default: New Delhi
     };
 
     // 5. Save & Redirect
