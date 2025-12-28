@@ -11,14 +11,14 @@ const options = {
 };
 const geocoder = NodeGeocoder(options);
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/BookMyStay";
+const MONGO_URL = process.env.ATLASDB_URL;
 
 // Default Location: New Delhi (Connaught Place)
 const DEFAULT_COORDS = [77.2090, 28.6139]; 
 
 main()
   .then(() => {
-    console.log("Connected to DB");
+    console.log("Connected to Atlas DB");
     return initDB();
   })
   .catch((err) => {
@@ -33,14 +33,15 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const initDB = async () => {
   try {
+    // 1. Clear the online database
     await Listing.deleteMany({});
-    console.log("Old data cleared.");
+    console.log("Old data cleared from Atlas.");
     
     let updatedData = [];
-    console.log("Fetching coordinates... (Please wait ~30 seconds)");
+    console.log("Fetching coordinates... (This ensures maps work on your live site)");
 
     for (let obj of initData.data) {
-      await sleep(1000); // 1-second delay to be polite to the API
+      await sleep(1000); // Polite delay for the Geocoding API
 
       let geometry;
 
@@ -48,27 +49,24 @@ const initDB = async () => {
         let response = await geocoder.geocode(obj.location);
 
         if (response.length > 0) {
-          // Success: Use the real location found
           geometry = { 
             type: 'Point', 
             coordinates: [response[0].longitude, response[0].latitude] 
           };
         } else {
-          // No result found: Use Default (Delhi)
-          console.log(`Location not found for ${obj.location}, using Delhi.`);
+          console.log(`Location not found for ${obj.location}, using Default.`);
           geometry = { type: 'Point', coordinates: DEFAULT_COORDS };
         }
         
       } catch (e) {
-        // API Error: Use Default (Delhi)
-        console.log(`Error geocoding ${obj.location}, using Delhi fallback.`);
+        console.log(`Error geocoding ${obj.location}, using Default.`);
         geometry = { type: 'Point', coordinates: DEFAULT_COORDS };
       }
 
-      // Add the geometry to the object
+      // 2. Create the new object with the CORRECT Owner ID
       let newObj = {
         ...obj,
-        owner: "693ff47d9670c1177f420ffb", 
+        owner: "694fee3bbb8c44759ebb60bd", // <--- Your Live User ID
         geometry: geometry 
       };
 
@@ -76,8 +74,9 @@ const initDB = async () => {
       console.log(`Processed: ${obj.location}`); 
     }
 
+    // 3. Upload to Atlas
     await Listing.insertMany(updatedData);
-    console.log("Data initialized successfully!");
+    console.log("✅ Data successfully initialized in Atlas!");
     mongoose.connection.close(); 
     
   } catch (err) {

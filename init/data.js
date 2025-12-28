@@ -1,5 +1,5 @@
 const sampleListings = [
-  // --- TRENDING & ROOMS ---
+  // --- TRENDING (Hot Vacation Spots) ---
   {
     title: "Cozy Beachfront Cottage",
     description: "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
@@ -10,7 +10,7 @@ const sampleListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
-    category: "Rooms",
+    category: "Trending", // Updated from Rooms
   },
   {
     title: "Beachfront Paradise",
@@ -24,6 +24,20 @@ const sampleListings = [
     country: "Mexico",
     category: "Trending",
   },
+  {
+    title: "Desert Oasis in Dubai",
+    description: "Experience luxury in the middle of the desert in this opulent oasis in Dubai with a private pool.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1542401886-65d6c61db217?w=800&auto=format&fit=crop&q=60",
+    },
+    price: 5000,
+    location: "Dubai",
+    country: "United Arab Emirates",
+    category: "Trending", // Moved from Deserts to Trending
+  },
+
+  // --- ICONIC CITIES (Major Metropolises) ---
   {
     title: "Modern Apartment in Tokyo",
     description: "Explore the vibrant city of Tokyo from this modern and centrally located apartment.",
@@ -41,7 +55,6 @@ const sampleListings = [
     description: "Step back in time in this elegant historic brownstone located in the heart of Boston.",
     image: {
       filename: "listingimage",
-      // FIXED: Authentic Boston Beacon Hill street
       url: "https://images.unsplash.com/photo-1740151369510-9a7a72bf4091?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 2200,
@@ -49,8 +62,6 @@ const sampleListings = [
     country: "United States",
     category: "Iconic Cities",
   },
-
-  // --- ICONIC CITIES ---
   {
     title: "Modern Loft in Downtown",
     description: "Stay in the heart of the city in this stylish loft apartment. Perfect for urban explorers!",
@@ -80,13 +91,24 @@ const sampleListings = [
     description: "Indulge in luxury living with panoramic city views from this stunning penthouse apartment.",
     image: {
       filename: "listingimage",
-      // FIXED: High-end city apartment interior with view
       url: "https://images.unsplash.com/photo-1706578314787-be50d411a46b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 3500,
     location: "Los Angeles",
     country: "United States",
     category: "Iconic Cities",
+  },
+  {
+    title: "Historic Villa in Tuscany",
+    description: "Experience the charm of Tuscany in this beautifully restored villa. Explore the rolling hills and vineyards.",
+    image: {
+      filename: "listingimage",
+      url: "https://images.unsplash.com/photo-1528114039593-4366cc08227d?w=800&auto=format&fit=crop&q=60",
+    },
+    price: 2500,
+    location: "Florence",
+    country: "Italy",
+    category: "Iconic Cities", // Moved from Castles
   },
 
   // --- MOUNTAINS ---
@@ -133,7 +155,6 @@ const sampleListings = [
     description: "Live like royalty in this historic castle in the Scottish Highlands. Explore the rugged beauty of the area.",
     image: {
       filename: "listingimage",
-      // FIXED: Dunnottar Castle (Iconic Scottish look)
       url: "https://images.unsplash.com/photo-1578240748485-ad93c9c30aea?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 4000,
@@ -142,15 +163,29 @@ const sampleListings = [
     category: "Castles",
   },
   {
-    title: "Historic Villa in Tuscany",
-    description: "Experience the charm of Tuscany in this beautifully restored villa. Explore the rolling hills and vineyards.",
+    title: "Grand Château of the Loire Valley",
+    description: "Stay in a wing of this magnificent French Renaissance château. Explore the vast estate and historic architecture.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1528114039593-4366cc08227d?w=800&auto=format&fit=crop&q=60",
+      // Iconic French Chateau
+      url: "https://images.unsplash.com/photo-1738668170351-f5f9b44f9297?q=80&w=1071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
-    price: 2500,
-    location: "Florence",
-    country: "Italy",
+    price: 3500,
+    location: "Chambord",
+    country: "France",
+    category: "Castles",
+  },
+  {
+    title: "Fairytale Castle in Bavaria",
+    description: "Live your own fairytale in this breathtaking castle nestled in the Bavarian Alps. The inspiration for Disney's castle.",
+    image: {
+      filename: "listingimage",
+      // Neuschwanstein Castle vibes
+      url: "https://images.unsplash.com/photo-1759785725711-2f36a59a08de?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    price: 5000,
+    location: "Schwangau",
+    country: "Germany",
     category: "Castles",
   },
 
@@ -198,7 +233,6 @@ const sampleListings = [
     description: "Experience the thrill of the wild in a comfortable safari lodge. Witness the Great Migration up close.",
     image: {
       filename: "listingimage",
-      // FIXED: Luxury Safari Tent interior/exterior
       url: "https://images.unsplash.com/photo-1723643750330-c868b56af36f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 4000,
@@ -211,7 +245,6 @@ const sampleListings = [
     description: "Live among the treetops in this unique treehouse retreat. A true nature lover's paradise.",
     image: {
       filename: "listingimage",
-      // FIXED: Cozy cabin in the trees
       url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&auto=format&fit=crop&q=60",
     },
     price: 800,
@@ -224,7 +257,6 @@ const sampleListings = [
     description: "Stay in an eco-friendly treehouse nestled in the forest. It's the perfect escape for nature lovers.",
     image: {
       filename: "listingimage",
-      // FIXED: Authentic wooden treehouse structure
       url: "https://plus.unsplash.com/premium_photo-1685305380695-90e58a33d4e9?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 750,
@@ -289,7 +321,6 @@ const sampleListings = [
     description: "A remote and rugged hut situated near a breathtaking glacier. Experience the raw beauty of Iceland.",
     image: {
       filename: "listingimage",
-      // FIXED: Black wooden cabin in snow
       url: "https://images.unsplash.com/photo-1498063401574-13cbee350467?w=800&auto=format&fit=crop&q=60",
     },
     price: 1300,
@@ -304,7 +335,6 @@ const sampleListings = [
     description: "Stay in a sustainable geodesic dome with panoramic views of the Torres del Paine mountains.",
     image: {
       filename: "listingimage",
-      // FIXED: EcoCamp Patagonia Domes
       url: "https://images.unsplash.com/photo-1743019486333-e9f7032b912e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 1600,
@@ -331,7 +361,6 @@ const sampleListings = [
     description: "Drift along the serene backwaters of Kerala in a traditional yet luxurious houseboat.",
     image: {
       filename: "listingimage",
-      // FIXED: Traditional Kettuvallam boat
       url: "https://images.unsplash.com/photo-1633268196395-1293583457a9?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 3500,
@@ -344,7 +373,6 @@ const sampleListings = [
     description: "Experience the heritage of Kashmir on a beautifully carved wooden houseboat on Dal Lake.",
     image: {
       filename: "listingimage",
-      // FIXED: Dal Lake Shikara/Boat
       url: "https://images.unsplash.com/photo-1614591276564-7b3e69347a48?q=80&w=1174&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 4000,
@@ -354,18 +382,6 @@ const sampleListings = [
   },
 
   // --- DESERTS ---
-  {
-    title: "Desert Oasis in Dubai",
-    description: "Experience luxury in the middle of the desert in this opulent oasis in Dubai with a private pool.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1542401886-65d6c61db217?w=800&auto=format&fit=crop&q=60",
-    },
-    price: 5000,
-    location: "Dubai",
-    country: "United Arab Emirates",
-    category: "Deserts",
-  },
   {
     title: "Wadi Rum Martian Tent",
     description: "Sleep under the stars in a luxury tent in the heart of the red desert of Wadi Rum.",
@@ -383,7 +399,6 @@ const sampleListings = [
     description: "Ride camels to your luxury tent deep in the Sahara dunes. Traditional music and cuisine included.",
     image: {
       filename: "listingimage",
-      // FIXED: Tents in the sand dunes
       url: "https://images.unsplash.com/photo-1695131486048-3987c6162f19?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 2200,
