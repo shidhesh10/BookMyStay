@@ -1,4 +1,4 @@
-# 🏨 BookMyStay - Vacation Rental Marketplace
+# 🏨 BookMyStay
 
 ![Render](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
