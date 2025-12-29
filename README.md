@@ -1,3 +1,29 @@
+# 🏨 BookMyStay - Vacation Rental Marketplace
+
+![Render](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+
+**BookMyStay** is a production-ready full-stack web application inspired by Airbnb. It connects travelers with hosts, allowing users to list properties, browse interactive maps, and manage bookings with a seamless user experience.
+
+## 🚀 Key Features
+
+* **🌍 Resilient Geocoding:** Integrated **MapQuest API** for precise location mapping. Includes a custom **fallback mechanism** to prevent application crashes during API timeouts or rate limits.
+* **🔒 Secure Authentication:** Robust user session management using **Passport.js** with secure password hashing (Salt/Hash).
+* **🖼️ Cloud Image Storage:** Optimized image uploading and storage via **Cloudinary**, ensuring fast load times.
+* **🛡️ Role-Based Access:** Granular authorization logic—users can only edit/delete their own listings and reviews.
+* **📱 Responsive Design:** Built with **Bootstrap 5** and **EJS** for a mobile-first, consistent UI across devices.
+* **💰 Dynamic Pricing:** Frontend logic to toggle tax-inclusive pricing updates in real-time.
+
+## 🛠️ Tech Stack
+
+* **Frontend:** EJS, Bootstrap 5, CSS3, JavaScript
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB Atlas, Mongoose ODM
+* **Map Services:** MapQuest API, Leaflet.js
+* **Deployment:** Render (with UptimeRobot monitoring)
+
 # 🏡 BookMyStay
 
 
